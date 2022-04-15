@@ -1,5 +1,5 @@
 # TENET_single_core_version
-A tool for reconstructing Transfer Entropy-based causal gene NETwork from pseudo-time ordered single cell transcriptomic data.
+A tool for reconstructing Transfer Entropy-based causal gene NETwork from pseudo-time ordered single cell transcriptomic data.  
 Modified from https://github.com/neocaleb/TENET
 
 ## Citation
