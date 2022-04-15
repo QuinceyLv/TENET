@@ -1,9 +1,6 @@
-# TENET
-A tool for reconstructing Transfer Entropy-based causal gene NETwork from pseudo-time ordered single cell transcriptomic data 
-
-<div>
-<img src="https://user-images.githubusercontent.com/33104430/83049138-fe23bb00-a04a-11ea-9d8a-59ca7582e759.png" width="90%"></img>
-</div>
+# TENET_single_core_version
+A tool for reconstructing Transfer Entropy-based causal gene NETwork from pseudo-time ordered single cell transcriptomic data.
+Modified from https://github.com/neocaleb/TENET
 
 ## Citation
 
@@ -14,16 +11,16 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 	python3
 	openmpi (>4.0)
 	JPype
+	numpy
+	statsmodels
 
-## 1. Run TENET using expression data in a csv file and pseudotime result in a text file
 #### Usage
 
-	./TENET [expression_file_name] [number_of_threads] [trajectory_file_name] [cell_select_file_name] [history_length]
+	python TENETsinglecore [expression_file_name] [trajectory_file_name] [cell_select_file_name] [history_length]
 
 #### example
 
-	./TENET expression_data.csv 10 trajectory.txt cell_select.txt 1
-
+	python TENETsinglecore expression_data.csv trajectory.txt cell_select.txt 1
 
 #### Input 
 
@@ -80,54 +77,7 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 	.
 	GENE_M	0.34	0.012	0.032	...	0
 
-## 2. Run TENET with hdf5 file including PAGA pseudotime result
-#### Usage
-
-	./TENET4PAGAhdf5 [hdf5_file_name] [number_of_threads] [history_length] [variable_in_adata]
-
-#### example
-
-	./TENET4PAGAhdf5 Data.Tuck/Tuck_PAGA510genes.h5ad 10 1 X
-	./TENET4PAGAhdf5 Data.Tuck/Tuck_PAGA510genes.h5ad 10 1 raw
-
-#### Input
-
-###### (1) hdf5 file stored after running PAGA.
-
-###### (2) [variable_in_adata]
-	If the expression matrix stored in adata.X, then choose X. If it is adata.raw.X, then choose raw.
-
-## 3. Run TENET from TF to target using expression data in a csv file and pseudotime result in a text file
-#### Usage
-
-        ./TENET_TF [expression_file_name] [number_of_threads] [trajectory_file_name] [cell_select_file_name] [history_length] [species]
-
-#### example
-
-        ./TENET_TF expression_data.csv 10 trajectory.txt cell_select.txt 1 mouse
-
-#### Input
-
-###### (6) species - [human/mouse/rat]
-
-#### Output
-
-        TE_result_matrix.txt
-
-## 4. Run TENET single core version
-#### Usage
-
-	python TENETsinglecore [expression_file_name] [trajectory_file_name] [cell_select_file_name] [history_length]
-
-#### example
-
-	python TENETsinglecore expression_data.csv trajectory.txt cell_select.txt 1
-
-#### Output
-
-	TE_result_matrix.txt
-
-## 5. Downstream analysis
+## Downstream analysis
 
 #### (1) Reconstructing GRN
 ###### Usage
