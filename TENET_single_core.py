@@ -21,7 +21,7 @@ os.environ['JAVA_HOME']="/TJPROJ6/SC/personal_dir/lvguangqi/software/jdk-18"
 @click.option('-c', '--cese', required=True, help='Cell select file')
 @click.option('-y', '--hist', required=True, default=1, help='History length, default = 1')
 @click.option('-o', '--outd', required=True, help='Output dir')
-@click.option('-j', '--jar', required=True, default='/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/data/infodynamics.jar', help='Jar package.')
+@click.option('-j', '--jar', default='/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/pkgs/infodynamics.jar', help='Jar package, default=/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/pkgs/infodynamics.jar')
 def main(expr, traj, cese, outd, hist, jar):
     # Start the JVM (add the "-Xmx" option with say 1024M if you get crashes due to not enough memory space)
     startJVM(getDefaultJVMPath(), "-ea", "-Djava.class.path=" + jar,"-Xmx16G")
