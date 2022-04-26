@@ -17,11 +17,10 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 
 #### Usage
 
-	python TENETsinglecore [expression_file_name] [trajectory_file_name] [cell_select_file_name] [history_length]
-
-#### example
-
-	python TENETsinglecore expression_data.csv trajectory.txt cell_select.txt 1
+	python TENET_single_core.py \  
+		-e expression_file \  
+		-c cell_select_file \  
+		-t trajectory_file \  
 
 #### Input 
 
