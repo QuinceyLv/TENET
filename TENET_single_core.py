@@ -18,17 +18,17 @@ os.environ['JAVA_HOME']="/TJPROJ6/SC/personal_dir/lvguangqi/software/jdk-18"
 @click.command()
 @click.option('-e', '--expr', required=True, help='Expression matrix')
 @click.option('-t', '--traj', required=True, help='Trajectory file')
-@click.option('-c', '--cese', required=True, help='Cell select file')
-@click.option('-y', '--hist', required=True, default=1, help='History length, default = 1')
-@click.option('-o', '--outd', required=True, help='Output dir')
+@click.option('-c', '--cell', required=True, help='Cell select file')
+@click.option('-y', '--hist', default=1, help='History length, default=1')
+@click.option('-o', '--outd', default='.', help='Output dir, default=current dir')
 @click.option('-j', '--jar', default='/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/pkgs/infodynamics.jar', help='Jar package, default=/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/pkgs/infodynamics.jar')
-def main(expr, traj, cese, outd, hist, jar):
+def main(expr, traj, cell, outd, hist, jar):
     # Start the JVM (add the "-Xmx" option with say 1024M if you get crashes due to not enough memory space)
     startJVM(getDefaultJVMPath(), "-ea", "-Djava.class.path=" + jar,"-Xmx16G")
 
     # Process cell select file
     branch = []
-    with open(cese) as fileIn:
+    with open(cell) as fileIn:
         for line in fileIn:
             branch.append(int(line.rstrip().split()[0]))
 
