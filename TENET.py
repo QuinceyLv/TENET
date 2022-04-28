@@ -28,7 +28,8 @@ parser.add_argument('--out', default='.', help='Output dir, default=current dir'
 # Parse arguments
 args = parser.parse_args()
 h5ad = args.h5ad
-filelist = args.filelist.split(' ')
+if args.filelist:
+    filelist = args.filelist
 hist = int(args.hist)
 out = args.out
 expr = args.filelist[0]
