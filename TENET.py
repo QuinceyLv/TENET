@@ -30,11 +30,11 @@ args = parser.parse_args()
 h5ad = args.h5ad
 if args.filelist:
     filelist = args.filelist
+    expr = args.filelist[0]
+    traj = args.filelist[1]
+    cell = args.filelist[2]
 hist = int(args.hist)
 out = args.out
-expr = args.filelist[0]
-traj = args.filelist[1]
-cell = args.filelist[2]
 
 # Functions: pre-process input data
 
