@@ -28,7 +28,7 @@ parser.add_argument('--out', default='.', help='Output dir, default=current dir'
 # Parse arguments
 args = parser.parse_args()
 h5ad = args.h5ad
-filelist = args.filelist
+filelist = args.filelist.split(' ')
 hist = int(args.hist)
 out = args.out
 expr = args.filelist[0]
@@ -43,7 +43,7 @@ def process_h5ad(h5ad):
 
     # Cell select
     branch = []
-    fileOut = open('PAGAcell_select.txt', 'w')
+    fileOut = open(f'{out}/PAGAcell_select.txt', 'w')
 
     for i in range(len(adata.obs_names)):
         branch.append(i)
@@ -53,7 +53,7 @@ def process_h5ad(h5ad):
 
     # Trajectory
     trajectory1 = []
-    fileOut = open('PAGApseudotime.txt', 'w')
+    fileOut = open(f'{out}/PAGApseudotime.txt', 'w')
     for pseudotime in adata.obs['dpt_pseudotime']:
         trajectory1.append(pseudotime)
         fileOut.write(f'{str(pseudotime)}\n')
