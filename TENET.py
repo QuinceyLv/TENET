@@ -180,4 +180,9 @@ def main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out):
 
 
 if __name__ == "__main__":
+    if args.filelist:
+        process_file_list(expr ,traj, cell)
+    else:
+        process_h5ad(h5ad)
+
     main()
