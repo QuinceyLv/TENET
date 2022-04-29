@@ -185,4 +185,4 @@ if __name__ == "__main__":
     else:
         branch, trajectory1SortIndex, cell_gene_all, gene_name = process_h5ad(h5ad)
 
-    main(branch, trajectory1SortIndex, cell_gene_all, gene_name)
+    main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out)
