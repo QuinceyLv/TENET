@@ -47,7 +47,7 @@ def process_h5ad(h5ad):
     fileOut = open(f'{out}/PAGAcell_select.txt', 'w')
 
     for i in range(len(adata.obs_names)):
-        branch.append('1')
+        branch.append(1)
         fileOut.write('1\n')
 
     fileOut.close()
