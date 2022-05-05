@@ -15,7 +15,7 @@ import scanpy as sc
 # import click
 
 # Set environment variables
-os.environ['JAVA_HOME']="~/software/jdk-18"
+os.environ['JAVA_HOME']="/TJPROJ6/SC/personal_dir/lvguangqi/software/jdk-18"
 
 # Arguments
 parser = argparse.ArgumentParser()
@@ -113,7 +113,7 @@ def process_file_list(expr, traj, cell):
 
 def main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out):
     # Start the JVM (add the "-Xmx" option with say 1024M if you get crashes due to not enough memory space)
-    startJVM(getDefaultJVMPath(), "-ea", "-Djava.class.path=~/TENET/pkgs/infodynamics.jar","-Xmx16G")
+    startJVM(getDefaultJVMPath(), "-ea", "-Djava.class.path=/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/pkgs/infodynamics.jar","-Xmx16G")
 
     # TODO: fix main function, list pairs and TE calculation
     # Main function
