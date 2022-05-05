@@ -6,7 +6,7 @@
 '''
 # Modified from https://github.com/neocaleb/TENET
 
-from jpype import *
+from jpype import JPackage, startJVM, getDefaultJVMPath, JArray, JDouble
 import numpy
 import os
 import datetime
@@ -15,7 +15,7 @@ import scanpy as sc
 # import click
 
 # Set environment variables
-os.environ['JAVA_HOME']="/TJPROJ6/SC/personal_dir/lvguangqi/software/jdk-18"
+os.environ['JAVA_HOME']="~/software/jdk-18"
 
 # Arguments
 parser = argparse.ArgumentParser()
@@ -39,18 +39,19 @@ out = args.out
 # Functions: pre-process input data
 
 def process_h5ad(h5ad):
-    adata=sc.read_h5ad(h5ad)
-    data_matrix=adata.X.todense().A
+    adata = sc.read_h5ad(h5ad)
+    data_matrix = adata.X.todense().A
 
     # Cell select
     branch = []
     fileOut = open(f'{out}/PAGAcell_select.txt', 'w')
 
     for i in range(len(adata.obs_names)):
-        branch.append(i)
+        branch.append('1')
         fileOut.write('1\n')
 
     fileOut.close()
+    branch = numpy.array(branch)
 
     # Trajectory
     trajectory1 = []
@@ -67,7 +68,7 @@ def process_h5ad(h5ad):
 
     # Expression
     gene_name = list(adata.var_names)
-    cell_gene_all = numpy.transpose(data_matrix)
+    cell_gene_all = data_matrix.T
 
     return branch, trajectory1SortIndex, cell_gene_all, gene_name
 
@@ -112,14 +113,15 @@ def process_file_list(expr, traj, cell):
 
 def main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out):
     # Start the JVM (add the "-Xmx" option with say 1024M if you get crashes due to not enough memory space)
-    startJVM(getDefaultJVMPath(), "-ea", "-Djava.class.path=/TJPROJ6/SC/personal_dir/lvguangqi/software/TENET/pkgs/infodynamics.jar","-Xmx16G")
+    startJVM(getDefaultJVMPath(), "-ea", "-Djava.class.path=~/TENET/pkgs/infodynamics.jar","-Xmx16G")
 
+    # TODO: fix main function, list pairs and TE calculation
     # Main function
     # List pairs
     list_pairs=[]
     for geneIndex1 in range(len(cell_gene_all)):
         for geneIndex2 in range(len(cell_gene_all)):
-            if geneIndex1<geneIndex2:
+            if geneIndex1 < geneIndex2:
                 list_pairs.append([geneIndex1,geneIndex2])
     list_pairs=numpy.array(list_pairs)
 
