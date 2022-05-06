@@ -12,7 +12,6 @@ import os
 import datetime
 import argparse
 import scanpy as sc
-# import click
 
 # Set environment variables
 os.environ['JAVA_HOME']="/TJPROJ6/SC/personal_dir/lvguangqi/software/jdk-18"
@@ -155,8 +154,6 @@ def main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out):
         TEresult[num_pair] = numpy.ndarray.tolist(list_pairs[num_pair,:]) + resultTemp
         if (num_pair % int(len(list_pairs) / 2)) == 0:
             print(datetime.datetime.now())
-        else:
-            print('Warning: number of pairs is an odd number')
 
     TEmatrix=[]
     for i in range(len(gene_name)):

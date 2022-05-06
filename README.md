@@ -14,17 +14,31 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 	JPype
 	numpy
 	statsmodels
+	scanpy
+
+This script could run with python==3.10.4, openmpi==4.1.3, JPype==1.3.0, numpy==1.21.6, statsmodels==0.13.2, and scanpy==1.9.1.
 
 #### Usage
 
-	python TENET_single_core.py \  
-		-e expression_file \  
-		-c cell_select_file \  
-		-t trajectory_file \  
+With h5ad file (PAGA output) as input:
 
-#### Input 
+	python TENET.py \  
+		--h5ad h5ad_file \  
+		--out out_dir
 
-###### (1) expression_file (raw count is recommended) - a csv file with N cells in the rows and M genes in the columns (same format with wishbone pseudotime package).
+With expression_file, trajectory_file and cell_select_file as input:
+
+	python TENET.py \  
+	--filelist expression_data.csv trajectory.txt cell_select.txt \
+	--out out_dir
+
+Optional parameter:
+
+	--hist history_length set history length, default=1
+
+#### Input format
+
+###### (1) expression_file (raw count is recommended) - a csv file with N cells in the rows and M genes in the columns.
 
 		GENE_1	GENE_2	GENE_3	...	GENE_M
 
@@ -40,9 +54,7 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 
 	CELL_N
 
-###### (2) number_of_threads - You can use this multi-threads option. This will take lots of memory depending on the squared number of genes * the number of cells. If the program fail, you need to reduce this.
-
-###### (3) trajectory_file - a text file of pseudotime data with N time points in the same order as the N cells of the expression file.
+###### (2) trajectory_file - a text file of pseudotime data with N time points in the same order as the N cells of the expression file.
 
 	0.098
 	0.040
@@ -52,7 +64,7 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 	.
 	0.565
 
-###### (4) cell_select_file - a text file of cell selection data with N Boolean (1 for select and 0 for non-select) data in the same order as the N cells of the expression file.
+###### (3) cell_select_file - a text file of cell selection data with N Boolean (1 for select and 0 for non-select) data in the same order as the N cells of the expression file.
 
 	1
 	1
@@ -61,8 +73,6 @@ Nucleic Acids Research, gkaa1014, https://doi.org/10.1093/nar/gkaa1014
 	.
 	.
 	1
-
-###### (5) history_length - the length of history. In the benchmark data TENET provides best result when the length of history set to 1.
 
 #### Output
 
