@@ -28,13 +28,13 @@ With h5ad file (PAGA output) as input:
 
 With expression_file, trajectory_file and cell_select_file as input:
 
-	python TENET.py \  
-	--filelist expression_data.csv trajectory.txt cell_select.txt \
-	--out out_dir
+		python TENET.py \  
+		--filelist expression_data.csv trajectory.txt cell_select.txt \
+		--out out_dir
 
 Optional parameter:
 
-	--hist history_length set history length, default=1
+	--hist history_length  Set history length, default=1
 
 #### Input format
 

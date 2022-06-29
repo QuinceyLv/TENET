@@ -125,20 +125,22 @@ def main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out):
     list_pairs=numpy.array(list_pairs)
 
     TEresult=[None] * len(list_pairs)
-    for num_pair in range(len(list_pairs)):
-        expression_data = cell_gene_all[list_pairs[num_pair,0]][numpy.newaxis]
-        expression_data = numpy.append(expression_data, cell_gene_all[list_pairs[num_pair,1]][numpy.newaxis], axis=0)
-        expression_data1=[]
+    for num_pair,(p1,p2) in enumerate(list_pairs):
+        expression_data = [cell_gene_all[p1],cell_gene_all[p2]]
+    # for num_pair in range(len(list_pairs)):
+    #     expression_data = cell_gene_all[list_pairs[num_pair,0]][numpy.newaxis]
+    #     expression_data = numpy.append(expression_data, cell_gene_all[list_pairs[num_pair,1]][numpy.newaxis], axis=0)
+    #     expression_data1=[]
 
-        for i in range(len(expression_data)):
-            data_temp1 = numpy.array(expression_data[i])
-            data_temp1 = data_temp1[branch == 1]
-            data_temp1 = data_temp1[trajectory1SortIndex]
-            data_temp1 = list(data_temp1)
-            expression_data1.append(data_temp1)
+    #     for i in range(len(expression_data)):
+    #         data_temp1 = numpy.array(expression_data[i])
+    #         data_temp1 = data_temp1[branch == 1]
+    #         data_temp1 = data_temp1[trajectory1SortIndex]
+    #         data_temp1 = list(data_temp1)
+    #         expression_data1.append(data_temp1)
     
-        expression_data = expression_data1
-        del expression_data1
+    #     expression_data = expression_data1
+    #     del expression_data1
 
         # Create a TE calculator and run it:
         teCalcClass = JPackage("infodynamics.measures.continuous.kernel").TransferEntropyCalculatorKernel
@@ -151,7 +153,8 @@ def main(branch, trajectory1SortIndex, cell_gene_all, gene_name, out):
         teCalc.initialise(hist, 0.5) # Use history length 1 (Schreiber k=1), kernel width of 0.5 normalised units
         teCalc.setObservations(JArray(JDouble, 1)(expression_data[1]), JArray(JDouble, 1)(expression_data[0]))
         resultTemp.append(teCalc.computeAverageLocalOfObservations())
-        TEresult[num_pair] = numpy.ndarray.tolist(list_pairs[num_pair,:]) + resultTemp
+        # TEresult[num_pair] = numpy.ndarray.tolist(list_pairs[num_pair,:]) + resultTemp
+        TEresult[num_pair] = [p1,p2] + resultTemp
         if (num_pair % int(len(list_pairs) / 2)) == 0:
             print(datetime.datetime.now())
 
